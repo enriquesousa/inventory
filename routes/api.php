@@ -13,7 +13,7 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::post('/me', [AuthController::class, 'me']);
 
-    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/signup', [AuthController::class, 'signup']);
 
     // Route::post('login', 'AuthController@login');
     // Route::post('logout', 'AuthController@logout');
