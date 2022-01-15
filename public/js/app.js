@@ -5379,7 +5379,7 @@ __webpack_require__.r(__webpack_exports__);
     login: function login() {
       // alert('done!');
       axios.post('/api/auth/login', this.form).then(function (res) {
-        return console.log(res.data);
+        return User.responseAfterLogin(res);
       })["catch"](function (error) {
         return console.log(error.response.data);
       });
