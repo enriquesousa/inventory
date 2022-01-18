@@ -69,7 +69,7 @@
                                     <div class="form-group">
                                         <div class="form-row">
                                             <div class="col-md-6">
-                                                <input type="file" class="custom-file-input" id="customFile">
+                                                <input type="file" class="custom-file-input" id="customFile" @change="onFileSelected">
                                                 <small class="text-danger" v-if="errors.photo"> {{ errors.photo[0] }} </small>
                                                 <label class="custom-file-label" for="customFile">Choose file</label>
                                             </div>
@@ -124,9 +124,17 @@
     },
 
     methods:{
+        onFileSelected(event){
+            let file = event.target.files[0];
+            if (file.size > 1048770){
+                Notification.image_validation();
+            }else{
+                console.log(event);
+            }
+        },     
         employeeInsert(){
 
-        }
+        },
     }
     
   }

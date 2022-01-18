@@ -5694,6 +5694,15 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    onFileSelected: function onFileSelected(event) {
+      var file = event.target.files[0];
+
+      if (file.size > 1048770) {
+        Notification.image_validation();
+      } else {
+        console.log(event);
+      }
+    },
     employeeInsert: function employeeInsert() {}
   }
 });
@@ -6213,6 +6222,16 @@ var Notification = /*#__PURE__*/function () {
         type: 'warning',
         layout: 'topRight',
         text: 'Opps Cuidado!',
+        timeout: 1000
+      }).show();
+    }
+  }, {
+    key: "image_validation",
+    value: function image_validation() {
+      new Noty({
+        type: 'error',
+        layout: 'topRight',
+        text: 'Solo imágenes menores a 1Mb',
         timeout: 1000
       }).show();
     }
@@ -36877,6 +36896,7 @@ var render = function () {
                             _c("input", {
                               staticClass: "custom-file-input",
                               attrs: { type: "file", id: "customFile" },
+                              on: { change: _vm.onFileSelected },
                             }),
                             _vm._v(" "),
                             _vm.errors.photo
