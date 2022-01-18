@@ -15,6 +15,10 @@ Route::group([
 
     Route::post('/signup', [AuthController::class, 'signup']);
 
+    Route::apiResource('/employee', 'Api/EmployeeController');
+
+
+
     // Route::post('login', 'AuthController@login');
     // Route::post('logout', 'AuthController@logout');
     // Route::post('refresh', 'AuthController@refresh');

@@ -56,7 +56,7 @@
                             data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <router-link class="collapse-item" to="/store-employee">Añadir Empleado</router-link>
-                                <router-link class="collapse-item" to="">Lista Empleados</router-link>
+                                <router-link class="collapse-item" to="/employee">Lista Empleados</router-link>
                             </div>
                         </div>
                     </li>
