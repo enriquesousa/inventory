@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\AuthController;
 
 Route::group([
@@ -7,7 +8,7 @@ Route::group([
     'prefix' => 'auth'
 ], function ($router) {
 
-    // p/laravel 8
+    // Para Laravel 8
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
@@ -15,10 +16,11 @@ Route::group([
 
     Route::post('/signup', [AuthController::class, 'signup']);
 
-    Route::apiResource('/employee', 'Api/EmployeeController');
+    Route::apiResource('/employee', 'Api\EmployeeController');
 
 
 
+    // Laravel 7
     // Route::post('login', 'AuthController@login');
     // Route::post('logout', 'AuthController@logout');
     // Route::post('refresh', 'AuthController@refresh');
