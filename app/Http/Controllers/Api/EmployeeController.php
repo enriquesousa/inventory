@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
-use Intervention\Image\Image;
+use Image;
 use App\Http\Controllers\Controller;
 
 class EmployeeController extends Controller
@@ -32,8 +32,6 @@ class EmployeeController extends Controller
             'name' => 'required|unique:employees|max:255',
             'email' => 'required',
             'phone' => 'required|unique:employees',
-            'phone' => 'required|unique:employees',
-
         ]);
 
         if ($request->photo) {
@@ -42,9 +40,32 @@ class EmployeeController extends Controller
             $ext = explode('/', $sub)[1];
             $name = time().".".$ext;
             $img = Image::make($request->photo)->resize(240,200);
-            $upload_path = 'backend/employee';
+            $upload_path = 'backend/employee/';
             $image_url = $upload_path.$name;
             $img->save($image_url);
+
+            $employee = new Employee();
+            $employee->name = $request->name;
+            $employee->email = $request->email;
+            $employee->phone = $request->phone;
+            $employee->salary = $request->salary;
+            $employee->address = $request->address;
+            $employee->nid = $request->nid;
+            $employee->joining_date = $request->joining_date;
+            $employee->photo = $image_url;
+
+            $employee->save();
+        }else{
+            $employee = new Employee();
+            $employee->name = $request->name;
+            $employee->email = $request->email;
+            $employee->phone = $request->phone;
+            $employee->salary = $request->salary;
+            $employee->address = $request->address;
+            $employee->nid = $request->nid;
+            $employee->joining_date = $request->joining_date;
+
+            $employee->save();
         }
     }
 

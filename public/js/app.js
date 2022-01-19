@@ -36980,7 +36980,7 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-primary btn-block", attrs: { type: "submit" } },
-        [_vm._v("Añadir")]
+        [_vm._v("Añadir Empleado")]
       ),
     ])
   },

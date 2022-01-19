@@ -16,14 +16,7 @@ Route::group([
 
     Route::post('/signup', [AuthController::class, 'signup']);
 
-    Route::apiResource('/employee', 'Api\EmployeeController');
-
-
-
-    // Laravel 7
-    // Route::post('login', 'AuthController@login');
-    // Route::post('logout', 'AuthController@logout');
-    // Route::post('refresh', 'AuthController@refresh');
-    // Route::post('me', 'AuthController@me');
-
 });
+
+// Route::apiResource('/employee', 'Api\EmployeeController'); //No funciona em L8
+Route::apiResource('/employee', EmployeeController::class);

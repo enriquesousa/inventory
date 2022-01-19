@@ -82,7 +82,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-block">Añadir</button>
+                                        <button type="submit" class="btn btn-primary btn-block">Añadir Empleado</button>
                                     </div>
 
                                 </form>
@@ -138,7 +138,7 @@
             }
         },     
         employeeInsert(){
-            axios.post('/api/employee', this.form)
+            axios.post('/api/employee',this.form)
             .then(() => {
                 this.$router.push({ name: 'employee'})
                 Notification.success()

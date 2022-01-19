@@ -17,7 +17,7 @@ class Employee extends Model
         'salary',
         'photo',
         'nid',
-        'joining_date',
+        'joining_date'
     ];
 
     
