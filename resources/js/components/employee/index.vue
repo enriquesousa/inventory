@@ -5,6 +5,9 @@
         <router-link to="/store-employee" class="btn btn-primary">Añadir Empleado</router-link>
     </div>
     <br>
+    <div align="right">
+        <input type="text" v-model="searchTerm" class="form-control mb-2" style="width: 300px;" placeholder="Buscar aquí">
+    </div>
 
     <!-- Begin Row Simple Table -->
     <div class="row">
@@ -28,7 +31,7 @@
                         </thead>
                         <tbody>
 
-                            <tr v-for="employee in employees" :key="employee.id">
+                            <tr v-for="employee in filtersearch" :key="employee.id">
                                 <td>{{ employee.name }}</td>
                                 <td> <img :src="employee.photo" id="em_photo"></td>
                                 <td>{{ employee.phone }}</td>
@@ -63,7 +66,16 @@ created(){
 
 data(){
     return{
-        employees:[]
+        employees:[],
+        searchTerm:'',
+    }
+},
+
+computed:{
+    filtersearch(){
+        return this.employees.filter(employee => {
+            return employee.name.match(this.searchTerm)
+        })
     }
 },
 
