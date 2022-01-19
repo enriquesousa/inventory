@@ -39,7 +39,7 @@
                                 <td>{{ employee.joining_date }}</td>
                                 <td>
                                     <a href="#" class="btn btn-sm btn-primary">Editar</a>
-                                    <a href="#" class="btn btn-sm btn-danger">Borrar</a>
+                                    <a @click="deleteEmployee(employee.id)" class="btn btn-sm btn-danger"><font color="#ffffff">Borrar</font></a>
                                 </td>
                             </tr>
                             
@@ -80,11 +80,42 @@ computed:{
 },
 
 methods:{
+    
     allEmployee(){
         axios.get('/api/employee')
         .then(({data}) => (this.employees = data))
         .catch()
-    }
+    },
+
+    deleteEmployee(id){
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete('/api/employee/'+id)
+                .then(() => {
+                    this.employee = this.employees.filter(employee => {
+                        return employee.id != id
+                    })
+                })
+                .catch(() => {
+                    this.$router.push({name: 'employee'})
+                })
+                Swal.fire(
+                'Borrado!',
+                'Your file has been deleted.',
+                'success'
+                )
+            }
+        })
+    },
+
 },
 
 created(){
