@@ -1,7 +1,7 @@
 <template>
 <div>
     <div>
-        <router-link to="/employee" class="btn btn-primary">Lista Empleados</router-link>
+        <router-link to="/supplier" class="btn btn-primary">Lista Proveedores</router-link>
     </div>
     <div class="row justify-content-center">
         <div class="col-xl-12 col-lg-12 col-md-12">
@@ -11,10 +11,10 @@
                         <div class="col-lg-12">
                             <div class="login-form">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Editar Empleado</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">Añadir Proveedor</h1>
                                 </div>
 
-                                <form class="user" @submit.prevent="employeeUpdate" enctype="multipart/form-data">
+                                <form class="user" @submit.prevent="employeeInsert" enctype="multipart/form-data">
 
                                     <div class="form-group">
                                         <div class="form-row">
@@ -36,21 +36,8 @@
                                                 <small class="text-danger" v-if="errors.address"> {{ errors.address[0] }} </small>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" id="exampleInputFirstName" placeholder="Entre Salario" v-model="form.salary">
-                                                <small class="text-danger" v-if="errors.salary"> {{ errors.salary[0] }} </small>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="form-row">
-                                            <div class="col-md-6">
-                                                <input type="date" class="form-control" id="exampleInputFirstName" placeholder="Entre Fecha de Inicio" v-model="form.joining_date">
-                                                <small class="text-danger" v-if="errors.joining_date"> {{ errors.joining_date[0] }} </small>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" class="form-control" id="exampleInputFirstName" placeholder="Entre Nid" v-model="form.nid">
-                                                <small class="text-danger" v-if="errors.nid"> {{ errors.nid[0] }} </small>
+                                                <input type="text" class="form-control" id="exampleInputFirstName" placeholder="Entre Su Nombre de Tienda" v-model="form.shopname">
+                                                <small class="text-danger" v-if="errors.shopname"> {{ errors.shopname[0] }} </small>
                                             </div>
                                         </div>
                                     </div>
@@ -82,7 +69,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-block">Actualizar Empleado</button>
+                                        <button type="submit" class="btn btn-primary btn-block">Añadir Empleado</button>
                                     </div>
 
                                 </form>
@@ -108,27 +95,17 @@
     data(){
       return {
         form:{
-            name: '',
-            email: '',
-            phone: '',
-            salary: '',
-            address: '',
-            photo: '',
-            newphoto: '',
-            nid: '',
-            joining_date: '',
+          name: null,
+          email: null,
+          phone: null,
+          shopname: null,
+          address: null,
+          photo: null,
         },
         errors:{
 
         }
       }
-    },
-
-    created(){
-        let id = this.$route.params.id
-        axios.get('/api/employee/'+id)
-        .then(({data}) => (this.form = data))
-        .catch(console.log('error'))
     },
 
     methods:{
@@ -139,19 +116,19 @@
             }else{
                 let reader = new FileReader();
                 reader.onload = event => {
-                    this.form.newphoto = event.target.result
+                    this.form.photo = event.target.result;
+                    console.log(event.target.result);
                 }
                 reader.readAsDataURL(file);
             }
         },     
-        employeeUpdate(){
-            let id = this.$route.params.id
-            axios.patch('/api/employee/'+id,this.form)
+        employeeInsert(){
+            axios.post('/api/employee',this.form)
             .then(() => {
                 this.$router.push({ name: 'employee'})
                 Notification.success()
             })
-            .catch(error =>this.errors = error.response.data.errors)
+            .catch(error => this.errors = error.response.data.errors)
         },
     }
     

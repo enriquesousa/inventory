@@ -107,6 +107,7 @@ methods:{
                 .catch(() => {
                     this.$router.push({name: 'employee'})
                 })
+                location.reload()
                 Swal.fire(
                 'Borrado!',
                 'Your file has been deleted.',

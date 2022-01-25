@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\EmployeeController;
+use App\Http\Controllers\Api\SupplierController;
 
 Route::group([
     'middleware' => 'api',
@@ -18,5 +19,6 @@ Route::group([
 
 });
 
-// Route::apiResource('/employee', 'Api\EmployeeController'); //No funciona em L8
+// Route::apiResource('/employee', 'Api\EmployeeController'); //No funciona en L8
 Route::apiResource('/employee', EmployeeController::class);
+Route::apiResource('/supplier', SupplierController::class);
